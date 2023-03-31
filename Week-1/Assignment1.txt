@@ -1,0 +1,84 @@
+Now, we will dive into the process that happens when the HTML is recieved by the Browser. Before that, let us what exactly is the browser composed of.
+
+Browser has 7 abstract layers :
+
+UI
+Browser Engine
+Rendering Engine
+UI Backend
+JS Interpreter
+Networking
+
+UI Layer : UI layer consists of the common things that we see as soon we open the browser. Back/Forward Navigation. URL box, Bookmark button. All that is visible when a browser app is opened, is part of the UI layer, except the main window where content is displayed.
+
+Browser Engine: This is the browser process which manages the all render process and displays it in UI. Many browser do to not have it as a separate layer and keep it an an integral part of Rendering engine.
+
+Rendering Engine : This is one of the main software behind the browser which enables the layout and display of the browser. Performs all the parsing and layout work. Since its one of the main pieces of puzzle will be described in detail below. Each of the major browser has its own rendering engine
+
+Networking : Network layer is what handles all HTTP requests of the browser. Along with it security.
+
+Javascript : Every browser has a javascript interpreter, which compiles the javascript and processes the javascript code
+
+Chrome : uses V8 engine, developed by Google
+Firefox : uses SpiderMonkey — the first JavaScript engine
+Safari: uses JavaScriptCore — open source, marketed as Nitro and developed by Apple for Safari
+UI Backend:used for drawing basic widgets like combo boxes and windows. This backend exposes a generic interface that is not platform specific. Underneath it uses operating system user interface methods.
+
+Data Persistence Layer : This is the data storage layer where web applications can store data locally like in cookies, etc. The other mechanism browser supports is web storage, IndexedDb, WebSQL
+
+
+Storage as shown in Browser
+Rendering Engine
+
+As described earlier this is the main software piece powering the browser.
+
+Different browsers use different engines either developed by them or a variant of common forked version. It determines the look loading time, and how html appears in the browser.
+
+Currently, these are the main rendering engine of which most popular is Blink ( created by Google under Chromium project)
+
+WebKit ( Safari)
+Gecko ( Firefox)
+Blink (Chrome, Opera, Edge as of 2019)
+Trident ( IE)
+Basic working of all rendering engine is as following.
+
+Parse the HTML for DOM tree, and CSS for CSSDOM tree. The combination of both is called a Render tree.
+
+Rendering Engine Flow
+Rendering Engine Flow
+HTML parser which constructs the DOM tree does not use Context Free Grammar, in other words, it is more forgiving of the syntax used by the developers, and does not penalize for a missing end element or placed in wrong order.
+
+Ouput of the above parser is the DOM tree structure. DOM tree is what is used by developers to interact with the browser to create, and manipulate the page.
+
+<table>
+  <tbody> 
+    <tr> 
+      <td>Shady Grove</td>
+      <td>Aeolian</td> 
+    </tr> 
+    <tr>
+      <td>Over the River, Charlie</td>        
+      <td>Dorian</td> 
+    </tr> 
+  </tbody>
+</table>
+Sample DOM tree from above HTML
+
+
+Example taken from https://www.w3.org/TR/DOM-Level-3-Core/introduction.html
+
+Render Tree
+
+Render tree only contains the visible elements on the screen. When the renderer is created by combination of CSSDOM and HTML DOM it does not have a position and size. To calculate these values is called layout.
+
+Layout
+
+Layout is a recursive process. It begins at the root renderer, and correspond to <html> elemet of the HTML document, and this process keeps working recursively to check how much space each element will take on the page. Output of the layout process is the box model.
+
+Paint
+
+This is the last process before the page is ready for end user. It involves drawing out text color, images, border every visual part of element. It is done onto multiple surface called layers.
+
+Another final way of giving final picture of how the browser works found at hackernoon.
+
+
